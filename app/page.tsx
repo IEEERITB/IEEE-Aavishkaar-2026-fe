@@ -1,13 +1,12 @@
+"use client"; // Kept from temp to support the CSS animation logic below
+
 import RegistrationForm from "@/components/RegistrationForm";
 import MatrixBackground from "@/components/MatrixBackground";
 import Navbar from "./components/navbar";
 import Footer from "./components/footer";
-import type { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title: "IEEE Techfest 2026 Registration",
-  description: "Register your team for IEEE Techfest 2026.",
-};
+// Note: Metadata cannot be exported from a Client Component. 
+// If you need SEO, move metadata to a separate layout.tsx file.
 
 export default function Home() {
   const glowColors = ["var(--color-cyan)", "var(--color-orange)", "#ffffff"];
@@ -25,7 +24,7 @@ export default function Home() {
             <h1
               className="text-5xl md:text-7xl font-space font-bold text-white uppercase tracking-widest flex justify-center flex-wrap md:flex-nowrap gap-x-4 md:gap-x-6"
             >
-              {/* BRANDING: IEEE TECHFEST */}
+              {/* BRANDING: IEEE */}
               <div className="flex">
                 {"IEEE".split("").map((char, index) => (
                   <span
@@ -40,6 +39,8 @@ export default function Home() {
                   </span>
                 ))}
               </div>
+              
+              {/* BRANDING: 2026 */}
               <div className="flex text-orange">
                 {"2026".split("").map((char, index) => (
                   <span
@@ -55,6 +56,7 @@ export default function Home() {
                 ))}
               </div>
             </h1>
+            
             <p className="text-sm md:text-base text-cyan tracking-[0.2em] max-w-2xl mx-auto px-4 font-tech uppercase">
               {"// Secure your spot in the ultimate tech event //"}
             </p>
