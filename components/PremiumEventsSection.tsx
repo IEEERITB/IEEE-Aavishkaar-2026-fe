@@ -102,7 +102,7 @@ export const PremiumEventsSection = ({ events }: PremiumEventsSectionProps) => {
           ))}
 
           {/* Looping scanglow effect (CSS) */}
-          <div className="absolute -inset-12 bg-primary/10 blur-[100px] rounded-full opacity-40 animate-glow-pulse -z-10" />
+          <div className="absolute -inset-12 bg-primary/10 blur-[100px] rounded-full opacity-40 animate-pulse-glow -z-10" />
         </motion.div>
       </div>
 

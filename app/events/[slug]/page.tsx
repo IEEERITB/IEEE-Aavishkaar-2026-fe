@@ -12,7 +12,6 @@ interface EventDetailPageProps {
 
 export default async function EventDetailPage({ params }: EventDetailPageProps) {
   const { slug } = await params
-  console.log(slug)
   const event = await fetchEventBySlug(slug)
   if (!event) {
     notFound()

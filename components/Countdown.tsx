@@ -10,10 +10,7 @@ const Countdown = () => {
   const [time, setTime] = useState<TimeUnit[]>([]);
 
   useEffect(() => {
-    // Set target to 10 days from now for demo
-    const target = new Date();
-    target.setDate(target.getDate() + 10);
-    target.setHours(0, 0, 0, 0);
+    const target = new Date('2026-04-11T08:00:00Z');
 
     const update = () => {
       const now = new Date();

@@ -7,7 +7,7 @@ function delay(ms: number) {
   return new Promise((r) => setTimeout(r, ms))
 }
 
-/** List visible events — uses API when VITE_API_BASE_URL is set, else mocks. */
+/** List visible events — uses API when NEXT_PUBLIC_API_BASE_URL is set, else mocks. */
 export async function fetchEvents(): Promise<TechfestEvent[]> {
   if (!base) {
     await delay(200)
