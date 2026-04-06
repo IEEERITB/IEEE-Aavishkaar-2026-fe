@@ -1,6 +1,6 @@
 /** View model aligned with IEEE-Aavishkaar-2026-be event.schema.ts */
 
-export type RegistrationStatus = 'OPEN' | 'CLOSED' | 'FULL'
+export type RegistrationStatus = 'OPEN' | 'CLOSED' | 'FULL' | 'Starting soon' | 'Coming soon'
 
 export interface PrizeTier {
   position: number
@@ -31,7 +31,7 @@ export interface TechfestEvent {
   description: string
   posterURL?: string
   dateTime: string
-  venue: string | null
+  venue: string
   prizePool: PrizeTier[]
   minTeamSize: number
   maxTeamSize: number

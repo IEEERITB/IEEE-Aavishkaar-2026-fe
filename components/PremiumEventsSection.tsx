@@ -1,34 +1,34 @@
 import { motion } from "framer-motion";
 import { EventCard } from "./EventCard";
+import type { TechfestEvent } from "@/types/event";
 
-const events = [
-  {
-    slug: "neural-nexus-hackathon",
-    title: "Neural Nexus Hackathon",
-    date: "14 MARCH 2026",
-    venue: "Cyber-Core Lab 4",
-    description: "Welcome to Neural Nexus 2026, the premier competitive arena for neural engineers and quantum programmers. Tasked with bridging biological synapses and synthetic processors.",
-    contacts: [
-      { name: "ALEX RIVERA", phone: "+1 (555) 010-0420" },
-      { name: "CHEN WEI", phone: "core_op@techfest.com" }
-    ],
-    variant: "purple" as const
-  },
-  {
-    slug: "retrogrid-robotics",
-    title: "Retrogrid Robotics Cup",
-    date: "15 MARCH 2026",
-    venue: "Mechatronics Bay",
-    description: "Line-following and obstacle arenas with a synthwave twist. Bring your microcontrollers and nerve to the mechatronics arena.",
-    contacts: [
-      { name: "SAM OKONKWO", phone: "+1 (555) 010-7700" }
-    ],
-    variant: "orange" as const
-  }
-];
+interface PremiumEventsSectionProps {
+  events: TechfestEvent[];
+}
 
-export const PremiumEventsSection = () => {
+const variants = ["purple", "orange", "teal"] as const;
+
+function formatDate(dateTime: string): string {
+  const date = new Date(dateTime);
+  const day = date.getDate();
+  const month = date.toLocaleDateString('en-US', { month: 'long' }).toUpperCase();
+  const year = date.getFullYear();
+  return `${day} ${month} ${year}`;
+}
+
+export const PremiumEventsSection = ({ events }: PremiumEventsSectionProps) => {
   const headingText = "EVENTS";
+
+  const mappedEvents = events.map((event, index) => ({
+    slug: event.slug,
+    title: event.title,
+    date: formatDate(event.dateTime),
+    venue: event.venue,
+    description: event.description,
+    contacts: event.coordinators.map(c => ({ name: c.name.toUpperCase(), phone: c.contactNumber })),
+    variant: variants[index % variants.length],
+    index,
+  }));
 
   return (
     <section id="events-section" className="relative w-full py-24 px-4 sm:px-6 flex flex-col items-center bg-[#05070d] overflow-hidden">
@@ -84,7 +84,7 @@ export const PremiumEventsSection = () => {
                 },
                 scale: {
                   delay: 0.3 + i * 0.1,
-                  duration: 1.8,
+                  duration: 1.8, 
                   repeat: Infinity,
                   repeatDelay: 2,
                   ease: "easeInOut"
@@ -108,8 +108,8 @@ export const PremiumEventsSection = () => {
 
       {/* Cards Grid - 2 columns */}
       <div className="w-full max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14 px-4 justify-items-center">
-        {events.map((event, index) => (
-          <EventCard key={event.title} {...event} index={index} />
+        {mappedEvents.map((event) => (
+          <EventCard key={event.slug} {...event} />
         ))}
       </div>
     </section>

@@ -6,24 +6,24 @@ const poster =
 export const mockEvents: TechfestEvent[] = [
   {
     organizerId: 'org-1',
-    title: 'Neural Nexus Hackathon',
-    slug: 'neural-nexus-hackathon',
-    tagline: '// Decoding the future of quantum cognition',
+    title: 'ISPY',
+    slug: 'ispy',
+    tagline: 'Teasure hunting',
     description:
-      'Welcome to Neural Nexus 2026, the premier competitive arena for neural engineers and quantum programmers. In this 48-hour high-intensity sprint, participants will be tasked with bridging the gap between biological synapses and synthetic processors.\nThe mission is simple: Develop an interface that allows for near-zero latency data transfer between a standard Neural-Link interface and our proprietary IEEE Quantum Core. Only the most efficient algorithms will survive the scrutiny of our automated validation systems.',
+      ' ',
     posterURL: poster,
-    dateTime: new Date('2026-03-14T08:00:00Z').toISOString(),
-    venue: 'Cyber-Core Lab 4',
+    dateTime: new Date('2026-04-11T08:00:00Z').toISOString(),
+    venue: 'TBD',
     prizePool: [
       { position: 1, amount: 50000 },
       { position: 2, amount: 25000 },
       { position: 3, amount: 10000 },
     ],
     minTeamSize: 2,
-    maxTeamSize: 4,
+    maxTeamSize: 3,
     maxCapacity: 50,
     registrationCount: 41,
-    registrationStatus: 'OPEN',
+    registrationStatus: 'Starting soon',
     isVisible: true,
     registrationFees: { standard: 0, ieeeMember: 0 },
     rules: [
@@ -34,73 +34,69 @@ export const mockEvents: TechfestEvent[] = [
     ],
     faqs: [
       {
-        question: 'Is prior hardware knowledge required?',
-        answer:
-          'Not mandatory; low-level kernel and FPGA experience helps during hardware integration.',
+        question: 'Who can participate?',
+        answer: 'Open to undergraduate students.',
       },
       {
-        question: 'What is the prize pool distribution?',
-        answer:
-          'Top three teams receive tiered IEEE 2026 Endowment units plus partner recruitment priority.',
+        question: 'How many members are required in a team?',
+        answer: 'Each team must have exactly 3 members.',
+      },
+      {
+        question: 'Are digital tools allowed?',
+        answer: 'Only as specified in challenges; no external assistance.',
+      },
+      {
+        question: 'How is the winner decided?',
+        answer: 'Based on speed and accuracy in solving clues across all rounds.',
       },
     ],
     coordinators: [
-      { name: 'Alex Rivera', contactNumber: '+1 (555) 010-0420' },
-      { name: 'Chen Wei', contactNumber: 'core_op@techfest.com' },
+      { name: 'Shivesh Tiwari', contactNumber: '9919403869' },
+      { name: 'Ahad Ulla Baig', contactNumber: '9110654973' },
     ],
   },
   {
     organizerId: 'org-1',
-    title: 'Retrogrid Robotics Cup',
-    slug: 'retrogrid-robotics',
-    tagline: '// Autonomous grids, analog dreams',
+    title: 'ROBO SOCCER',
+    slug: 'robo-soccer',
+    tagline: '// Play football with bots',
     description:
-      'Line-following and obstacle arenas with a synthwave twist. Bring your microcontrollers and nerve.',
+      '.',
     posterURL:
       'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=600&q=80',
-    dateTime: new Date('2026-03-15T10:00:00Z').toISOString(),
-    venue: 'Hall B — Mechatronics Bay',
+    dateTime: new Date('2026-04-11T10:00:00Z').toISOString(),
+    venue: 'TBD',
     prizePool: [{ position: 1, amount: 15000 }],
     minTeamSize: 1,
     maxTeamSize: 3,
     maxCapacity: 30,
     registrationCount: 30,
-    registrationStatus: 'FULL',
+    registrationStatus: 'Starting soon',
     isVisible: true,
     rules: ['No external teleoperation during timed runs.'],
     faqs: [
       {
-        question: 'Kit provided?',
-        answer: 'Base chassis optional; controllers are BYO.',
+        question: 'Who can participate?',
+        answer: 'Open to undergraduate students.',
+      },
+      {
+        question: 'How many members are required in a team?',
+        answer: 'Each team must have exactly 2 members.',
+      },
+      {
+        question: 'Are digital tools allowed?',
+        answer: 'Only as specified in challenges; no external assistance.',
+      },
+      {
+        question: 'How is the winner decided?',
+        answer: 'Based on speed and accuracy in solving clues across all rounds.',
       },
     ],
-    coordinators: [{ name: 'Sam Okonkwo', contactNumber: '+1 (555) 010-7700' }],
-  },
-  {
-    organizerId: 'org-1',
-    title: 'Photon Circuit Sprint',
-    slug: 'photon-circuit-sprint',
-    tagline: '// Fast boards, faster timelines',
-    description:
-      'Design sprint for optical interconnect demos. PCB bring-up in record time.',
-    posterURL:
-      'https://images.unsplash.com/photo-1558346547-4439467d4ad7?w=600&q=80',
-    dateTime: new Date('2026-03-16T09:30:00Z').toISOString(),
-    venue: 'Lab 7 — Photonics',
-    prizePool: [
-      { position: 1, amount: 20000 },
-      { position: 2, amount: 8000 },
+    coordinators: [
+      { name: 'Adit Bissa', contactNumber: '75686 84717' },
+      { name: 'Abhishek Reddy T', contactNumber: '74835 70657' },
     ],
-    minTeamSize: 1,
-    maxTeamSize: 2,
-    maxCapacity: 40,
-    registrationCount: 12,
-    registrationStatus: 'OPEN',
-    isVisible: true,
-    rules: ['All designs must pass safety review before power-on.'],
-    faqs: [],
-    coordinators: [{ name: 'Jordan Lee', contactNumber: 'photon@techfest.com' }],
-  },
+  }
 ]
 
 export function getEventBySlug(slug: string): TechfestEvent | undefined {

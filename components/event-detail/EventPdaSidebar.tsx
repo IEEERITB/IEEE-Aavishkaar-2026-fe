@@ -34,20 +34,24 @@ export function EventPdaSidebar({
   }, [])
 
   const orderId = useMemo(
-    () => `#TF-${event.slug.slice(0, 6).toUpperCase().replace(/[^A-Z0-9]/g, '')}-2026`,
+    () => `${event.slug.toUpperCase().replace(/[^A-Z0-9]/g, '')}-2026`,
     [event.slug],
   )
 
-  const dateStr = new Date(event.dateTime).toLocaleDateString(undefined, {
-    day: '2-digit',
-    month: 'short',
-    year: 'numeric',
-  })
-  const timeStr = new Date(event.dateTime).toLocaleTimeString(undefined, {
-    hour: '2-digit',
-    minute: '2-digit',
-    hour12: false,
-  })
+  const dateStr = useMemo(() => {
+    const date = new Date(event.dateTime);
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = date.toLocaleString('en-US', { month: 'short' });
+    const year = date.getFullYear();
+    return `${day} ${month} ${year}`;
+  }, [event.dateTime]);
+
+  const timeStr = useMemo(() => {
+    const date = new Date(event.dateTime);
+    const hours = date.getHours().toString().padStart(2, '0');
+    const minutes = date.getMinutes().toString().padStart(2, '0');
+    return `${hours}:${minutes}`;
+  }, [event.dateTime]);
 
   const clockStr = clock.toLocaleTimeString(undefined, {
     hour: '2-digit',
@@ -90,7 +94,7 @@ export function EventPdaSidebar({
           <div className="event-pda__screen">
             <div className="event-pda__statusbar">
               <div className="event-pda__logo">
-                IEEE-PDA<span className="event-pda__blink" aria-hidden />
+                IEEE-RITB<span className="event-pda__blink" aria-hidden />
               </div>
               <div className="event-pda__ind">
                 <div className="event-pda__sig" aria-hidden>
@@ -168,7 +172,7 @@ export function EventPdaSidebar({
                     </div>
                     <div className="event-pda__row">
                       <span className="event-pda__dot" />
-                      <span className="event-pda__rt">VENUE · LOCK</span>
+                      <span className="event-pda__rt">VENUE · TBD</span>
                     </div>
                   </div>
                   <div className="event-pda__cursor" aria-hidden>
@@ -332,9 +336,9 @@ export function EventPdaSidebar({
           type="button"
           disabled
           className="block w-full text-center py-4 px-4 rounded-sm bg-primary-container text-on-primary-container font-headline font-bold tracking-widest uppercase text-sm transition-all duration-150 opacity-70 cursor-not-allowed relative z-10"
-          title="Registration flow not implemented yet"
+          title="Registration coming soon"
         >
-          Register now
+          Coming soon
         </button>
       ) : (
         <p className="text-center text-xs font-mono text-on-surface-variant relative z-10 py-2">

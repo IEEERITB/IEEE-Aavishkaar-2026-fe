@@ -12,7 +12,9 @@ interface EventDetailPageProps {
 }
 
 export default async function EventDetailPage({ params }: EventDetailPageProps) {
-  const event = await fetchEventBySlug(params.slug)
+  const {slug} = await params
+  console.log(slug)
+  const event = await fetchEventBySlug(slug)
   if (!event) {
     notFound()
   }
@@ -63,7 +65,7 @@ export default async function EventDetailPage({ params }: EventDetailPageProps) 
       <main className="relative z-10 max-w-7xl mx-auto px-4 md:px-8 py-12 grid grid-cols-1 lg:grid-cols-10 gap-12">
         <div className="lg:col-span-7 space-y-14">
           <section>
-            <SectionHeader title="Protocol overview" accent="primary-container" />
+            <SectionHeader title="Details Coming Soon!" accent="primary-container" />
             <div className="space-y-4 text-on-surface/85 leading-relaxed text-lg">
               {event.description.split('\n').map((para, i) => {
                 const highlighted = para
@@ -79,12 +81,12 @@ export default async function EventDetailPage({ params }: EventDetailPageProps) 
             </div>
           </section>
 
-          <section className="bg-surface-container-low/80 backdrop-blur-sm p-6 md:p-8 border-l-2 border-primary-container relative overflow-hidden rounded-sm">
+          {/* <section className="bg-surface-container-low/80 backdrop-blur-sm p-6 md:p-8 border-l-2 border-primary-container relative overflow-hidden rounded-sm">
             <h3 className="font-headline text-xl font-bold mb-6 tracking-widest uppercase text-on-surface">
               Execution rules
             </h3>
             <RulesWin95Panel rules={event.rules} eventSlug={event.slug} />
-          </section>
+          </section> */}
 
           {event.faqs.length > 0 ? (
             <section>

@@ -99,25 +99,6 @@ export function Landing() {
               <Countdown />
             </div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.2, duration: 0.8 }}
-              className="flex gap-4 mt-8 sm:mt-12 pointer-events-auto"
-            >
-              <button
-                onClick={() => window.scrollTo({ top: window.innerHeight, behavior: "smooth" })}
-                className="font-pixel text-[10px] sm:text-xs bg-primary text-black px-8 py-4 hover:brightness-110 active:scale-95 transition-all shadow-[0_0_20px_rgba(255,107,53,0.3)] animate-pulse-glow"
-              >
-                JOIN NOW
-              </button>
-              <button
-                onClick={() => document.getElementById('events-section')?.scrollIntoView({ behavior: 'smooth' })}
-                className="font-pixel text-[10px] sm:text-xs border border-primary/40 text-primary/70 px-8 py-4 hover:border-primary hover:text-primary transition-all backdrop-blur-sm"
-              >
-                EXPLORE DOSSIER
-              </button>
-            </motion.div>
           </div>
 
           <AsciiCity />
@@ -127,7 +108,7 @@ export function Landing() {
         </section>
 
         <div id="events-section" className="relative z-30">
-          <PremiumEventsSection />
+          <PremiumEventsSection events={events} />
         </div>
 
         <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-[#05070d] to-transparent pointer-events-none" />
