@@ -6,33 +6,33 @@ const poster =
 export const mockEvents: TechfestEvent[] = [
   {
     organizerId: 'org-1',
-    title: 'ISPY',
+    title: 'I-SPY EVENT',
     slug: 'ispy',
-    tagline: 'Teasure hunting',
-    description:
-      ' ',
+    tagline: 'Silicon Valley themed Treasure Hunt',
+    description: 'A full-day elimination-based treasure hunt. Participants solve binary puzzles, tech item guesses, and logic gate problems across RIT Campus blocks named after Silicon Valley companies, leading to high-stakes escape rooms.',
     posterURL: poster,
     dateTime: new Date('2026-04-11T08:00:00Z').toISOString(),
-    venue: 'TBD',
+    venue: 'RIT Campus (Various Blocks)',
     prizePool: [
-      { position: 1, amount: 50000 },
-      { position: 2, amount: 25000 },
-      { position: 3, amount: 10000 },
+      { position: 1, amount: 5000 },
+      { position: 2, amount: 3000 },
+      { position: 3, amount: 2000 },
     ],
-    minTeamSize: 2,
+    minTeamSize: 3,
     maxTeamSize: 3,
-    maxCapacity: 50,
+    maxCapacity: 60, 
     registrationCount: 41,
-    registrationStatus: 'Starting soon',
+    registrationStatus: 'OPEN',
     isVisible: true,
     registrationFees: { standard: 0, ieeeMember: 0 },
     rules: [
-      'Participants must use the provided SDK only. External binary injections are strictly monitored.',
-      'Maximum power consumption for the solution must not exceed 450 Watts of simulated energy.',
-      'Real-time telemetry data must be streamed to the judges\' dashboard throughout the event.',
-      'Any use of pre-computed large language models is restricted to the "Augmentation" category only.',
+      'Team Composition: 3 members per team. Multi-disciplinary teams are encouraged.',
+      'No external assistance is allowed.',
+      'Respect the code of conduct: fairness, sportsmanship, and adherence to the rules.',
+      'Participants must decode puzzles, solve questions, and find items to progress.',
+      'Eliminations occur after Section 1 (Top 20), Section 2 (Top 10), and Section 3 (Top 5).'
     ],
-    faqs: [
+        faqs: [
       {
         question: 'Who can participate?',
         answer: 'Open to undergraduate students.',
@@ -57,31 +57,39 @@ export const mockEvents: TechfestEvent[] = [
   },
   {
     organizerId: 'org-1',
-    title: 'ROBO SOCCER',
+    title: 'ROCKET LEAGUE: ROBO SOCCER',
     slug: 'robo-soccer',
-    tagline: '// Play football with bots',
-    description:
-      '.',
-    posterURL:
-      'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=600&q=80',
+    tagline: 'Understand the system by decoding its behavior',
+    description: 'A 2v2 robo soccer tournament on an 8x5 meter field. Features bracket-style progression with evolving mechanics like inverted controls and "No Brake" full-throttle mode in the finale.',
+    posterURL: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=600&q=80',
     dateTime: new Date('2026-04-11T10:00:00Z').toISOString(),
     venue: 'TBD',
-    prizePool: [{ position: 1, amount: 15000 }],
-    minTeamSize: 1,
-    maxTeamSize: 3,
-    maxCapacity: 30,
+    prizePool: [
+      { position: 1, amount: 5000 },
+      { position: 2, amount: 3000 },
+      { position: 3, amount: 2000 },
+    ],
+    minTeamSize: 2,
+    maxTeamSize: 2,
+    maxCapacity: 32,
     registrationCount: 30,
-    registrationStatus: 'Starting soon',
+    registrationStatus: 'OPEN',
     isVisible: true,
-    rules: ['No external teleoperation during timed runs.'],
-    faqs: [
+    rules: [
+      'Match consists of three rounds, each lasting 2 minutes.',
+      'The ball must always be in motion; teams switch directions after each round.',
+      'Participants may NOT touch the bots; handling is by authorized volunteers only.',
+      'Deliberate blocking or unfair interference results in a free kick or point deduction.',
+      'Deadlock Rule: If robots are stuck for >3 seconds, a free kick is awarded to the non-offending team.'
+    ],
+      faqs: [
       {
         question: 'Who can participate?',
         answer: 'Open to undergraduate students.',
       },
       {
         question: 'How many members are required in a team?',
-        answer: 'Each team must have exactly 2 members.',
+        answer: 'Each team must have exactly 3 members.',
       },
       {
         question: 'Are digital tools allowed?',
@@ -98,7 +106,6 @@ export const mockEvents: TechfestEvent[] = [
     ],
   }
 ]
-
 export function getEventBySlug(slug: string): TechfestEvent | undefined {
   return mockEvents.find((e) => e.slug === slug)
 }
@@ -108,3 +115,4 @@ export function capacityPercent(e: TechfestEvent): number {
   if (e.maxCapacity <= 0) return 0
   return Math.min(100, Math.round((n / e.maxCapacity) * 100))
 }
+

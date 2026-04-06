@@ -2,6 +2,7 @@ import Link from "next/link"
 import { fetchEvents } from "@/api/client"
 import { EventCard } from "@/components/ui/EventCard"
 import { SectionHeader } from "@/components/ui/SectionHeader"
+import GlitchTitle from "@/components/GlitchTitle"
 
 export default async function EventsPage() {
   const events = await fetchEvents()
@@ -10,7 +11,10 @@ export default async function EventsPage() {
     <main className="relative min-h-screen bg-[#05070d] selection:bg-primary/30 pb-24">
       <div className="relative z-10 max-w-7xl mx-auto px-4 py-20 sm:px-6 lg:px-8">
         <div className="flex flex-col gap-6 mb-12">
-          <SectionHeader title="EVENT CATALOG" accent="primary-container" />
+          <div className="w-full flex justify-center">
+           <GlitchTitle/>
+          </div>
+
           <p className="max-w-3xl text-on-surface-variant leading-relaxed">
             Explore the available Techfest experiences and open protocols. Select any event to view its full details.
           </p>

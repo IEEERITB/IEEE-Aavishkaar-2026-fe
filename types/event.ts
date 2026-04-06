@@ -1,6 +1,6 @@
 /** View model aligned with IEEE-Aavishkaar-2026-be event.schema.ts */
 
-export type RegistrationStatus = 'OPEN' | 'CLOSED' | 'FULL' | 'Starting soon' | 'Coming soon'
+export type RegistrationStatus = 'OPEN' | 'CLOSED' | 'FULL' | 'Starting soon'
 
 export interface PrizeTier {
   position: number
