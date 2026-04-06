@@ -1,8 +1,14 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
-const quickLinks = ["Events", "Schedule", "Team"];
+const quickLinks = [
+  { label: "Events", href: "/events" },
+  { label: "Schedule", href: "/schedule" },
+  { label: "Team", href: "/team" },
+] as const;
 
 const TwitterIcon = () => (
   <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
@@ -41,8 +47,11 @@ const CyberLogo = () => (
 );
 
 export default function Footer() {
-  const [activeQuick, setActiveQuick] = useState("");
+  const pathname = usePathname();
   const [activeSocial, setActiveSocial] = useState("");
+
+  /** Check if a quick link is active based on the current pathname */
+  const isActive = (href: string) => pathname.startsWith(href);
 
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
 
@@ -101,30 +110,33 @@ export default function Footer() {
                 <span className="w-3 h-[1px] inline-block" style={{ background: "#f97316", boxShadow: "0 0 6px #f97316" }} />
               </h4>
               <ul className="space-y-2">
-                {quickLinks.map((link) => (
-                  <li key={link}>
-                    <button
-                      onClick={() => setActiveQuick(activeQuick === link ? "" : link)}
-                      className="flex items-center gap-2 text-xs tracking-widest uppercase transition-all duration-200 w-full text-left"
-                      style={{
-                        color: activeQuick === link ? "#fb923c" : "#64748b",
-                        textShadow: activeQuick === link ? "0 0 6px rgba(249,115,22,0.6)" : "none",
-                      }}
-                      onMouseEnter={(e) => {
-                        if (activeQuick !== link) (e.currentTarget as HTMLButtonElement).style.color = "#fdba74";
-                      }}
-                      onMouseLeave={(e) => {
-                        if (activeQuick !== link) (e.currentTarget as HTMLButtonElement).style.color = "#64748b";
-                      }}
-                    >
-                      <span style={{ color: activeQuick === link ? "#fb923c" : "#7c2d12" }}>›</span>
-                      {link}
-                      {activeQuick === link && (
-                        <span className="ml-auto w-1.5 h-1.5 rounded-full" style={{ background: "#f97316", boxShadow: "0 0 6px #f97316" }} />
-                      )}
-                    </button>
-                  </li>
-                ))}
+                {quickLinks.map((item) => {
+                  const active = isActive(item.href);
+                  return (
+                    <li key={item.label}>
+                      <Link
+                        href={item.href}
+                        className="flex items-center gap-2 text-xs tracking-widest uppercase transition-all duration-200 w-full text-left"
+                        style={{
+                          color: active ? "#fb923c" : "#64748b",
+                          textShadow: active ? "0 0 6px rgba(249,115,22,0.6)" : "none",
+                        }}
+                        onMouseEnter={(e) => {
+                          if (!active) (e.currentTarget as HTMLAnchorElement).style.color = "#fdba74";
+                        }}
+                        onMouseLeave={(e) => {
+                          if (!active) (e.currentTarget as HTMLAnchorElement).style.color = "#64748b";
+                        }}
+                      >
+                        <span style={{ color: active ? "#fb923c" : "#7c2d12" }}>›</span>
+                        {item.label}
+                        {active && (
+                          <span className="ml-auto w-1.5 h-1.5 rounded-full" style={{ background: "#f97316", boxShadow: "0 0 6px #f97316" }} />
+                        )}
+                      </Link>
+                    </li>
+                  );
+                })}
               </ul>
             </div>
 
