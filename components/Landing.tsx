@@ -6,13 +6,17 @@ import Countdown from "@/components/Countdown"
 import FloatingElements from "@/components/FloatingElements"
 import { PremiumEventsSection } from "@/components/PremiumEventsSection"
 import Shuffle from "@/components/ui/Shuffle"
-import { fetchEvents } from "@/api/client"
 import type { TechfestEvent } from "@/types/event"
 
 const DitherBackground = lazy(() => import("@/components/DitherBackground"))
 
 export function Landing() {
   const [events, setEvents] = useState<TechfestEvent[]>([])
+
+  async function fetchEvents() {
+    console.log("Fetching events");
+    return []
+  }
 
   useEffect(() => {
     fetchEvents().then(setEvents).catch(() => setEvents([]))
@@ -56,10 +60,10 @@ export function Landing() {
                   INITIALIZING UPLINK_2026
                 </motion.p> */}
 
-                <h1 className="leading-none uppercase tracking-tighter mb-4">
+                <h1 className="leading-none uppercase tracking-tighter">
                   <Shuffle
                     text="RIT"
-                    className="font-pixel text-5xl sm:text-8xl md:text-9xl text-primary elite-heading-letter tracking-[0.1em] px-1"
+                    className="font-pixel ml-12 text-5xl sm:text-8xl md:text-9xl leading-tight text-primary elite-heading-letter tracking-[0.1em] px-1"
                     animationMode="random"
                     shuffleDirection="right"
                     shuffleTimes={3}
@@ -78,7 +82,7 @@ export function Landing() {
                   className="uppercase tracking-[0.3em]"
                 >
                   <Shuffle
-                    text="TECH FEST"
+                    text="TECHFEST"
                     className="font-pixel text-lg sm:text-3xl md:text-4xl text-primary/90 neon-text"
                     animationMode="evenodd"
                     shuffleDirection="down"
@@ -106,7 +110,7 @@ export function Landing() {
           <div className="absolute bottom-0 left-0 w-full z-10 pointer-events-none" /> */}
         </section>
 
-        <div id="events-section" className="relative z-30">
+        <div id="events" className="relative z-30">
           <PremiumEventsSection events={events} />
         </div>
 

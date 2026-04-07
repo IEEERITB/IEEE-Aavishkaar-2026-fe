@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { appConfig } from "@/configs";
 
 const quickLinks = [
   { label: "Events", href: "/events" },
@@ -40,7 +41,7 @@ const CyberLogo = () => (
       className="text-orange-400 font-black text-sm tracking-[0.2em]"
       style={{ textShadow: "0 0 8px #f97316" }}
     >
-      RIT-B
+      RIT
     </span>
     <span className="text-orange-600 font-medium text-[9px] tracking-[0.3em]">TECHFEST</span>
   </div>
@@ -90,7 +91,7 @@ export default function Footer() {
             <div className="space-y-4">
               <CyberLogo />
               <h3 className="text-orange-400 font-black text-lg tracking-widest uppercase mt-2" style={{ textShadow: "0 0 8px rgba(249,115,22,0.6)" }}>
-                RIT-B Techfest 2026
+                RIT Techfest 2026
               </h3>
               <p className="text-slate-500 text-xs leading-relaxed tracking-wide max-w-xs">
                 The premier technology festival of RIT Bangalore — a convergence of innovation, creativity, and cutting-edge engineering. Join us for a journey into the future of technology.
@@ -212,7 +213,7 @@ export default function Footer() {
             <div className="h-[1px] w-full mb-5" style={{ background: "linear-gradient(to right, transparent, rgba(194,65,12,0.5), transparent)" }} />
             <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
               <p className="text-slate-700 text-[10px] tracking-[0.2em] uppercase">
-                © 2026 RIT-B Techfest. All rights reserved.
+                © 2026 IEEE Techfest. All rights reserved.
               </p>
               <button
                 onClick={scrollToTop}
