@@ -198,10 +198,6 @@ export default function Footer() {
                     <span className="text-orange-700">◈</span>
                     <a href="mailto:techfest@ritb.edu.in" className="transition-colors duration-200 hover:text-orange-400">techfest@ritb.edu.in</a>
                   </li>
-                  <li className="flex items-center gap-2">
-                    <span className="text-orange-700">◈</span>
-                    <span>+91 98765 43210</span>
-                  </li>
                   <li className="flex items-start gap-2">
                     <span className="text-orange-700 mt-0.5">◈</span>
                     <span>RIT Bangalore, Karnataka 560054</span>
