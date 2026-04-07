@@ -2,86 +2,60 @@
 
 import { useForm, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { submitRegistration } from "@/api/client";
 import { RegistrationSchema, RegistrationFormValues } from "@/lib/validations/registration";
 import { ReceiptSuccessCard } from "./ReceiptSuccessCard";
 
-export default function RegistrationForm() {
+interface RegistrationFormProps {
+  eventId: string;
+  eventSlug: string;
+}
+
+export default function RegistrationForm({ eventId, eventSlug }: RegistrationFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [submittedData, setSubmittedData] = useState<RegistrationFormValues | null>(null);
   const [errorMsg, setErrorMsg] = useState("");
   const [maxMembers, setMaxMembers] = useState<number>(3);
 
-  const apiBase = process.env.NEXT_PUBLIC_API_BASE_URL?.replace(/\/$/, '') ?? '';
+  // Remove eventSlug from validation schema for this form
+  const formSchema = RegistrationSchema.omit({ eventSlug: true });
+  type FormValues = Omit<RegistrationFormValues, 'eventSlug'>;
 
-  useEffect(() => {
-    const settingsUrl = `${apiBase}/api/settings`;
-    fetch(settingsUrl)
-      .then((res) => res.ok ? res.json() : Promise.reject("404"))
-      .then((data) => {
-        if (data.maxMembers) setMaxMembers(data.maxMembers);
-      })
-      .catch(() => console.warn("Using default protocol limits."));
-  }, [apiBase]);
-
-  const { register, control, handleSubmit, formState: { errors } } = useForm<RegistrationFormValues>({
-    resolver: zodResolver(RegistrationSchema),
+  const { register, control, handleSubmit, formState: { errors } } = useForm<FormValues>({
+    resolver: zodResolver(formSchema),
     defaultValues: {
-      teamName: "", leadName: "", leadEmail: "", leadPhone: "", leadUSN: "",
+      teamName: "",
+      leadName: "",
+      leadEmail: "",
+      leadPhone: "",
+      leadUSN: "",
       teamMembers: [{ name: "", usn: "" }],
     },
   });
 
   const { fields, append, remove } = useFieldArray({ name: "teamMembers", control });
 
-  // const onSubmit = async (data: RegistrationFormValues) => {
-  //   setIsSubmitting(true);
-  //   setErrorMsg("");
-
-  //   try {
-  //     const response = await fetch(`${apiBase}/api/register`, {
-  //       method: "POST",
-  //       headers: { "Content-Type": "application/json" },
-  //       body: JSON.stringify(data),
-  //     });
-
-  //     const text = await response.text();
-  //     let result;
-  //     try { result = JSON.parse(text); } catch { throw new Error("NON_JSON_RESPONSE"); }
-
-  //     if (!response.ok) {
-  //       setErrorMsg(result.message || "Uplink rejected by Central Command.");
-  //     } else {
-  //       setSubmittedData(data);
-  //       setIsSuccess(true);
-  //       window.scrollTo({ top: 0, behavior: 'smooth' });
-  //     }
-  //   } catch (err) {
-  //     setErrorMsg("CRITICAL_ERR: Data packet corrupted during transmission.");
-  //   } finally {
-  //     setIsSubmitting(false);
-  //   }
-  // };
-const onSubmit = async (data: RegistrationFormValues) => {
+  const onSubmit = async (data: FormValues) => {
     setIsSubmitting(true);
     setErrorMsg("");
 
     try {
-      // --- MOCK BACKEND SIMULATION ---
-      // 1. Simulate a 1.5 second network delay
-      await new Promise((resolve) => setTimeout(resolve, 1500));
+      await submitRegistration(eventId, {
+        teamName: data.teamName,
+        leadName: data.leadName,
+        leadEmail: data.leadEmail,
+        leadPhone: data.leadPhone,
+        leadUSN: data.leadUSN,
+        teamMembers: data.teamMembers,
+      });
 
-      // 2. Automatically trigger a "Success" state
-      setSubmittedData(data);
+      setSubmittedData({ ...data, eventSlug } as RegistrationFormValues);
       setIsSuccess(true);
-      
-      // 3. Scroll to the top to view the receipt smoothly
       window.scrollTo({ top: 0, behavior: 'smooth' });
-
     } catch (err) {
-      // This won't trigger in the mock, but good to keep the structure!
-      setErrorMsg("CRITICAL_ERR: Data packet corrupted during transmission.");
+      setErrorMsg((err as Error).message || "CRITICAL_ERR: Data packet corrupted during transmission.");
     } finally {
       setIsSubmitting(false);
     }
