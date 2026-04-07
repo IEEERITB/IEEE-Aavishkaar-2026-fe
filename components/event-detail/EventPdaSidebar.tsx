@@ -242,7 +242,7 @@ export function EventPdaSidebar({
       {/* --- CYBER REGISTRATION BUTTON --- */}
       <div className="w-full px-2">
         <RegisterButton 
-          slug={event.slug} 
+          id={event._id || event.slug} 
           canRegister={canRegister} 
           isFull={isFull} 
         />

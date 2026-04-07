@@ -6,6 +6,7 @@ export const TeamMemberSchema = z.object({
 });
 
 export const RegistrationSchema = z.object({
+  eventSlug: z.string().min(1, "Event selection is required").optional().default(""),
   teamName: z.string().min(1, "Team Name is required"),
   leadName: z.string().min(1, "Lead Name is required"),
   leadEmail: z.string().email("Invalid email address"),
