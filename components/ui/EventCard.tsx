@@ -207,7 +207,12 @@ export function EventCard({ event }: { event: TechfestEvent }) {
   const theme = THEMES[event.slug] || DEFAULT_THEME;
   const dateObj = new Date(event.dateTime);
   const displayDate = dateObj.toLocaleDateString('en-IN', { day: 'numeric', month: 'short' });
-  const displayTime = dateObj.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' });
+  
+  let displayTime = dateObj.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' });
+  if (event.endTime) {
+    const endObj = new Date(event.endTime);
+    displayTime += ` - ${endObj.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' })}`;
+  }
 
   return (
     <Link href={`/events/${event.slug}`} className="block no-underline group">

@@ -31,6 +31,7 @@ export interface TechfestEvent {
   description: string
   posterURL?: string
   dateTime: string
+  endTime?: string
   venue: string | null    
   prizePool: PrizeTier[]
   minTeamSize: number

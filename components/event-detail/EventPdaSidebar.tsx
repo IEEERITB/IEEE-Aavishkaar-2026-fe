@@ -54,8 +54,16 @@ export function EventPdaSidebar({
     const date = new Date(event.dateTime);
     const hours = date.getHours().toString().padStart(2, "0");
     const minutes = date.getMinutes().toString().padStart(2, "0");
-    return `${hours}:${minutes}`;
-  }, [event.dateTime]);
+    let str = `${hours}:${minutes}`;
+    
+    if (event.endTime) {
+      const endDate = new Date(event.endTime);
+      const endHours = endDate.getHours().toString().padStart(2, "0");
+      const endMinutes = endDate.getMinutes().toString().padStart(2, "0");
+      str += ` - ${endHours}:${endMinutes}`;
+    }
+    return str;
+  }, [event.dateTime, event.endTime]);
 
   const clockStr = clock.toLocaleTimeString(undefined, {
     hour: "2-digit",
